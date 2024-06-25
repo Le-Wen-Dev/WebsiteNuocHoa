@@ -1,5 +1,5 @@
 @extends('admin.LayoutAdmin')
-@section('titlepage','Quản lí user')
+@section('titlepage','Quản lí sản phẩm')
 @section('content')
 
 <main class="main-content position-relative border-radius-lg ">

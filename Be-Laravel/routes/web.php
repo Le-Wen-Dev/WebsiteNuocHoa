@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +16,6 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+Route::get('admin/users',[UserController::class,'users'])->name('admin/users');
+Route::get('admin/categories',[ProductController::class,'categories'])->name('admin/categories');
+Route::get('admin/products',[ProductController::class,'products'])->name('admin/products');
