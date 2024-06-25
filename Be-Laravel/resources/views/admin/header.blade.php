@@ -105,4 +105,11 @@
       </ul>
     </div>
     </div>
+     {{-- <p class="p-5">Tên:{{ Auth::user()->username }}</p> --}}
+    <a class="dropdown-item p-5" href="#" onclick="event.preventDefault();
+    document.getElementById('logout-form').submit();">Đăng xuất </a>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+    </form>
   </aside>
