@@ -17,11 +17,23 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    use HasFactory;
+    protected $table = 'users';
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'username','password','ten','diachi','email','dienthoai',
     ];
+
+    public function User(){
+        return $this->hasMany('User::class');
+    }
+    // protected $fillable = [
+    //     'username',
+    //     'email',
+    //     'password',
+    //     'diachi',
+    //     'dienthoai',
+    //     'role',
+    // ];
 
     /**
      * The attributes that should be hidden for serialization.
