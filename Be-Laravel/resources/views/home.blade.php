@@ -7,6 +7,7 @@
   <!-- Link CSS của Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -18,10 +19,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#">Yêu thích</a>
+            <a class="nav-link" href="/favorites">Yêu thích</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Giỏ hàng</a>
+            <a class="nav-link" href="/cart">Giỏ hàng</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('login')}}">Dăng nhập</a>
@@ -47,7 +48,43 @@
           <div class="card-body">
             <h5 class="card-title">{{$pro->title}}</h5>
             <p class="card-text">{{$pro->description}}</p>
-            <a href="#" class="btn btn-primary">Xem chi tiết</a>
+            <form class="prod-add" action="/addtocart" method="POST">
+              @csrf
+              @if(Session::has('user'))
+              @php
+              $user = Session::get('user');
+              @endphp
+              <input type="hidden" name="id_user" value="{{ $user->id }}">
+              @endif
+              <input type="hidden" name="id" value="{{ $pro->id }}">
+              <input type="hidden" name="name" value="{{ $pro->name }}">
+              <input type="hidden" name="img" value="{{ $pro->img }}">
+              <input type="hidden" name="price" value="{{ $pro->price }}">
+              <input type="hidden" name="description" value="{{$pro->description}}">
+              <button type="submit" class="btn bg-danger">
+                  <i class="fa-solid fa-cart-shopping" style="color:white"></i>
+                  Thêm Vào Giỏ Hàng
+              </button>
+          </form>
+          <hr>
+          <form class="prod-add" action="/addToFavorites" method="POST">
+            @csrf
+            @if(Session::has('users'))
+            @php
+            $users = Session::get('users');
+            @endphp
+            <input type="hidden" name="id_user" value="{{ $users->id }}">
+            @endif
+            <input type="hidden" name="id" value="{{ $pro->id }}">
+            <input type="hidden" name="name" value="{{ $pro->name }}">
+            <input type="hidden" name="img" value="{{ $pro->img }}">
+            <input type="hidden" name="price" value="{{ $pro->price }}">
+            <input type="hidden" name="description" value="{{ $pro->description }}">
+            <button type="submit" class="btn bg-danger">
+                <i class="fa-solid fa-cart-shopping" style="color:white"></i>
+                thêm vào yêu thích
+            </button>
+        </form>
           </div>
         </div>  
       </div> 

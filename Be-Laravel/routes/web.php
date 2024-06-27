@@ -6,6 +6,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FavouriteController;
+use App\Http\Controllers\CartController;
+use App\Models\Favorites;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +21,15 @@ use App\Http\Controllers\HomeController;
 |
 */
 Route::get('/',[HomeController::class,'index'])->name('home');
+Route::prefix('/')->group(function () {
+    Route::get('/favorites', [FavouriteController::class, 'index']);
+    Route::post('/addToFavorites', [FavouriteController::class, 'addToFavorites']);
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::post('/addtocart', [CartController::class, 'addToCart']);
+    Route::post('/decreasecart', [CartController::class, 'decreaseCart'])->name('decrease.cart');//giảm
+    Route::post('/increasecart', [CartController::class, 'increaseCart'])->name('increase.cart');//tăng
+    Route::post('/removecart', [CartController::class, 'removeCart'])->name('remove.cart');//xóa
+});
 
 ////----------------------------------------------------------------Admin------------------------------------------------------------
 Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');

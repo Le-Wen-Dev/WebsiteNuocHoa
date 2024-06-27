@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpEmail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -46,6 +47,11 @@ class AuthController extends Controller
         );
         if(Auth::attempt($crenden)){
             $request->session()->regenerate();
+            $user = Auth::user();
+    
+            // Store the authenticated user in the session
+            Session::put('user', $user);
+           
             return redirect()->route('home')->withSuccess('Bạn đã đăng nhập thành công ');
         }
         return back()->withErrors([
