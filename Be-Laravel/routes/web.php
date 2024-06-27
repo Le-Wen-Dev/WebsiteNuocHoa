@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +16,8 @@ use App\Http\Controllers\ProductController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/',[HomeController::class,'index'])->name('home');
+
 ////----------------------------------------------------------------Admin------------------------------------------------------------
 Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
 Route::get('admin/users',[UserController::class,'users'])->name('admin/users');
